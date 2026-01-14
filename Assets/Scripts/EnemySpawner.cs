@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     private float spawnRangeX = 17.9f;
     private float spawnPosZ = 15.5f;
     private float startDelay = 2.0f;
@@ -16,7 +16,8 @@ public class EnemySpawner : MonoBehaviour
     // Randomly spawn enemies
     private void SpawnRandomEnemy()
     {
+        int enemyIndex = Random.Range(0, enemyPrefabs.Length);
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.64f, spawnPosZ);
-        Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+        Instantiate(enemyPrefabs[enemyIndex], spawnPos, enemyPrefabs[enemyIndex].transform.rotation);
     }
 }
