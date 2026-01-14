@@ -2,42 +2,37 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
+    // Variables
     private float zRange = 18.2f;
-    public bool isFired = false;
-    void Update()
+
+    void FixedUpdate()
     {
         FireProjectile();
         DestroyOutOfBounds();
     }
 
-    // Fire projectile forward
+    // Fire projectile
     private void FireProjectile()
     {
-        // Change isFired state
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (ProjectileManager.isFired)
         {
-            isFired = true;
-        }
-
-        // Fire projectile
-        if (isFired)
-        {
-            transform.Translate(Vector3.forward * Time.deltaTime * 5.0f);
+            Debug.Log("Projectile fired.");
+            transform.Translate(Vector3.forward * Time.deltaTime * 5.0f); ;
         }
     }
 
+    // Detroy game object when out of bounds
     private void DestroyOutOfBounds()
     {
-        // Detroy game object when out of bounds
         if (transform.position.z >= zRange)
         {
             Destroy(gameObject);
         }
     }
 
+    // Destroy projectile and Enemy on collision
     private void OnTriggerEnter(Collider other)
     {
-        // Destroy projectile on collision with enemy
         if (other.CompareTag("Enemy"))
         {
             Destroy(gameObject);
