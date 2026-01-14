@@ -2,13 +2,9 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    // Variables
-    private float zRange = 18.2f;
-
     void FixedUpdate()
     {
         FireProjectile();
-        DestroyOutOfBounds();
     }
 
     // Fire projectile
@@ -18,15 +14,6 @@ public class ProjectileController : MonoBehaviour
         {
             Debug.Log("Projectile fired.");
             transform.Translate(Vector3.forward * Time.deltaTime * 15.0f); ;
-        }
-    }
-
-    // Detroy game object when out of bounds
-    private void DestroyOutOfBounds()
-    {
-        if (transform.position.z >= zRange)
-        {
-            Destroy(gameObject);
         }
     }
 
