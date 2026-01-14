@@ -14,14 +14,19 @@ public class PlayerController : MonoBehaviour
     }
     private void Move()
     {
-
         // Allow player to move left or right.
         horizontalInput = Input.GetAxis("Horizontal");
 
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
+        RestrictMovement();
+    }
+
+    // Stop the player from leaving the play area.
+    private void RestrictMovement()
+    {
         // Prevent the player from leaving the map.
-        if(transform.position.x <= -xRange)
+        if (transform.position.x <= -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
