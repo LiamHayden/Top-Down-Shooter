@@ -3,6 +3,7 @@ using UnityEngine;
 public class ProjectileManager : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    public GameObject player;
     public static bool isFired = false;
 
     void Update()
@@ -20,7 +21,7 @@ public class ProjectileManager : MonoBehaviour
             Debug.Log("Space pressed");
 
             // Instaitate new projectile
-            Instantiate(projectilePrefab, projectilePrefab.transform.position, projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, player.transform.position, projectilePrefab.transform.rotation);
         }
     }
 
