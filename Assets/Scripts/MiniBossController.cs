@@ -11,6 +11,7 @@ public class MiniBossController : MonoBehaviour
         if (other.CompareTag("Projectile"))
         {
             lives--;
+            Destroy(other.gameObject);
         }
 
         // Destroy Mini Boss if lives are 0 or less
