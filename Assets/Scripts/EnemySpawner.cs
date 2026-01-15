@@ -16,8 +16,10 @@ public class EnemySpawner : MonoBehaviour
     // Randomly spawn enemies
     private void SpawnRandomEnemy()
     {
-        int enemyIndex = Random.Range(0, enemyPrefabs.Length);
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.64f, spawnPosZ);
-        Instantiate(enemyPrefabs[enemyIndex], spawnPos, enemyPrefabs[enemyIndex].transform.rotation);
+        if (GameManager.isStarted) { 
+            int enemyIndex = Random.Range(0, enemyPrefabs.Length);
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.64f, spawnPosZ);
+            Instantiate(enemyPrefabs[enemyIndex], spawnPos, enemyPrefabs[enemyIndex].transform.rotation);
+        }
     }
 }
