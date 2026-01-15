@@ -13,6 +13,15 @@ public class DestroyOutOfBounds : MonoBehaviour
         if (transform.position.z < -zRange || transform.position.z > zRange)
         {
             Destroy(gameObject);
+
+            // Decrease score
+            if (CompareTag("Enemy"))
+            {
+                ScoreManager.score -= 1;
+            } else if (CompareTag("Mini Boss"))
+            {
+                ScoreManager.score -= 3;
+            }
         }
     }
 }

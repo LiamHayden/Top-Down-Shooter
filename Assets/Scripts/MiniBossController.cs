@@ -17,6 +17,9 @@ public class MiniBossController : MonoBehaviour
         if (lives <= 0)
         {
             Destroy(gameObject);
+
+            // Update score
+            ScoreManager.score += 3;
         }
     }
 }

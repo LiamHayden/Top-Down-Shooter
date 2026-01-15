@@ -24,6 +24,9 @@ public class ProjectileController : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+
+            // Update score
+            ScoreManager.score += 1;
         }
     }
 }
