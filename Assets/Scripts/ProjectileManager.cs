@@ -8,7 +8,10 @@ public class ProjectileManager : MonoBehaviour
 
     void Update()
     {
-        FireProjectile();
+        if (GameManager.isStarted)
+        {
+            FireProjectile();
+        }
     }
 
     // Fire projectile forward
