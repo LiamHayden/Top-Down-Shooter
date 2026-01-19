@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     // Variables
     public GameObject menuCanvas;
     public GameObject scoreCanvas;
+    public GameObject howToCanvas;
 
     // Start game
     public void StartGame()
@@ -25,5 +26,17 @@ public class MenuManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void DisplayHowToView()
+    {
+        howToCanvas.SetActive(true);
+        menuCanvas.SetActive(false);
+    }
+
+    public void HideHowToView()
+    {
+        howToCanvas.SetActive(false);
+        menuCanvas.SetActive(true);
     }
 }
