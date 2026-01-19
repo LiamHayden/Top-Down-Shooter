@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     private float spawnPosZ = 15.5f;
     private float startDelay = 2.0f;
     private float spawnInterval = 2.0f;
+    public static float enemyCount = 0;
     
     void Start()
     {
@@ -16,10 +17,18 @@ public class EnemySpawner : MonoBehaviour
     // Randomly spawn enemies
     private void SpawnRandomEnemy()
     {
-        if (GameManager.isStarted) { 
+        if (GameManager.isStarted && enemyCount < 5) { 
             int enemyIndex = Random.Range(0, enemyPrefabs.Length);
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.64f, spawnPosZ);
             Instantiate(enemyPrefabs[enemyIndex], spawnPos, enemyPrefabs[enemyIndex].transform.rotation);
+
+            // Increase enemy count
+            enemyCount++;
+
+            if (enemyCount >= 5)
+            {
+                GameManager.Instance.TryEndWave();
+            }
         }
     }
 }

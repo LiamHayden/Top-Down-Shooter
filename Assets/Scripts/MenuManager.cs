@@ -17,8 +17,6 @@ public class MenuManager : MonoBehaviour
         scoreCanvas.SetActive(true);
     }
 
-    // Display controls
-
     // Quit game
     public void QuitGame()
     {
