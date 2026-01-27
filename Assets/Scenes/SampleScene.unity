@@ -1999,6 +1999,8 @@ MonoBehaviour:
   scoreCanvas: {fileID: 2012207804}
   waveCompletedCanvas: {fileID: 1102525331}
   waveEndScoreText: {fileID: 1300458917}
+  waveCompletedText: {fileID: 1863302141}
+  waveNumber: 0
   isWaveOver: 0
 --- !u!1 &1102525331
 GameObject:

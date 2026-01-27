@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         GameManager.isStarted = true;
+        GameManager.Instance.StartWave();
         menuCanvas.SetActive(false);
         scoreCanvas.SetActive(true);
     }
