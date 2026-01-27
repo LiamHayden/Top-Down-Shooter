@@ -9,7 +9,9 @@ public class WaveManager : MonoBehaviour
     public GameObject scoreCanvas;
     public GameObject waveCompletedCanvas;
     public TextMeshProUGUI waveEndScoreText;
+    public TextMeshProUGUI waveCompletedText;
 
+    public float waveNumber = 0.0f;
     public bool isWaveOver = false;
 
     void Awake()
@@ -36,7 +38,9 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateWaveEndScore()
     {
+        waveNumber++;
         waveEndScoreText.text = "Score: " + ScoreManager.score;
+        waveCompletedText.text = "WAVE " + waveNumber + " COMPLETED";
     }
 
     public void DisplayWaveCanvas()

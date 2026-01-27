@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     // Wait 5 seconds and end wave after enemycount is reached
     private IEnumerator ControlWaves()
     {
+        EnemySpawner.Instance.StopSpawning();
+
         yield return new WaitForSeconds(6);
 
         WaveManager.Instance.EndWave();
@@ -48,12 +50,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         waveCompletedCanvas.SetActive(false);
-        menuCanvas.SetActive(true);
         scoreCanvas.SetActive(false);
 
-        EnemySpawner.enemyCount = 0;
+        EnemySpawner.Instance.enemyMax += 5;
+
         waveEnding = false;
-        isStarted = false;
+
+        StartWave();
     }
 
     public void TryEndWave()
@@ -65,4 +68,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StartWave()
+    {
+        isStarted = true;
+        scoreCanvas.SetActive(true);
+
+        EnemySpawner.Instance.StartSpawning();
+    }
 }

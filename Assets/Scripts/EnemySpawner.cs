@@ -1,34 +1,75 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
+
     public GameObject[] enemyPrefabs;
-    private float spawnRangeX = 17.9f;
-    private float spawnPosZ = 15.5f;
-    private float startDelay = 2.0f;
-    private float spawnInterval = 2.0f;
-    public static float enemyCount = 0;
-    
-    void Start()
+
+    [SerializeField] private float spawnRangeX = 17.9f;
+    [SerializeField] private float spawnPosZ = 15.5f;
+    [SerializeField] private float spawnInterval = 2.0f;
+
+    public int enemyMax;
+    public static int enemyCount;
+
+    private Coroutine spawnRoutine;
+
+    private void Awake()
     {
-        InvokeRepeating("SpawnRandomEnemy", startDelay, spawnInterval);
+        Instance = this;
     }
 
-    // Randomly spawn enemies
-    private void SpawnRandomEnemy()
+    void Start()
     {
-        if (GameManager.isStarted && enemyCount < 5) { 
-            int enemyIndex = Random.Range(0, enemyPrefabs.Length);
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.64f, spawnPosZ);
-            Instantiate(enemyPrefabs[enemyIndex], spawnPos, enemyPrefabs[enemyIndex].transform.rotation);
+        enemyMax = 5;
+    }
 
-            // Increase enemy count
-            enemyCount++;
+    // Called when a wave starts
+    public void StartSpawning()
+    {
+        enemyCount = 0;
 
-            if (enemyCount >= 5)
-            {
-                GameManager.Instance.TryEndWave();
-            }
+        if (spawnRoutine == null)
+        {
+            spawnRoutine = StartCoroutine(SpawnLoop());
         }
+    }
+
+    // Called when a wave ends
+    public void StopSpawning()
+    {
+        if (spawnRoutine != null)
+        {
+            StopCoroutine(spawnRoutine);
+            spawnRoutine = null;
+        }
+    }
+
+    private IEnumerator SpawnLoop()
+    {
+        while (enemyCount < enemyMax)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(spawnInterval);
+        }
+
+        // max reached so end the wave
+        GameManager.Instance.TryEndWave();
+    }
+
+    // Method to spawn random enemies.
+    private void SpawnEnemy()
+    {
+        int enemyIndex = Random.Range(0, enemyPrefabs.Length);
+        Vector3 spawnPos = new Vector3(
+            Random.Range(-spawnRangeX, spawnRangeX),
+            0.64f,
+            spawnPosZ
+        );
+
+        Instantiate(enemyPrefabs[enemyIndex], spawnPos, enemyPrefabs[enemyIndex].transform.rotation);
+        enemyCount++;
     }
 }
