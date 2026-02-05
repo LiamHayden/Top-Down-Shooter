@@ -18,7 +18,14 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -29,6 +36,8 @@ public class EnemySpawner : MonoBehaviour
     // Called when a wave starts
     public void StartSpawning()
     {
+
+        Debug.Log("StartSpawning CALLED", this);
         enemyCount = 0;
 
         if (spawnRoutine == null)
@@ -55,6 +64,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
 
+        spawnRoutine = null;
         // max reached so end the wave
         GameManager.Instance.TryEndWave();
     }
