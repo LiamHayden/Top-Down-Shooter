@@ -8,7 +8,7 @@ public class ProjectileManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.isStarted)
+        if (GameManager.Instance.isStarted)
         {
             FireProjectile();
         }
