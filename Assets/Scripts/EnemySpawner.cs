@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -73,13 +74,37 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         int enemyIndex = Random.Range(0, enemyPrefabs.Length);
-        Vector3 spawnPos = new Vector3(
-            Random.Range(-spawnRangeX, spawnRangeX),
-            0.64f,
-            spawnPosZ
-        );
+        GameObject enemyPrefab = enemyPrefabs[enemyIndex];
 
-        Instantiate(enemyPrefabs[enemyIndex], spawnPos, enemyPrefabs[enemyIndex].transform.rotation);
+        Vector3 spawnPos;
+
+        if (enemyPrefab.CompareTag("Enemy"))
+        {
+            spawnPos = new Vector3(
+                Random.Range(-spawnRangeX, spawnRangeX),
+                0.718f,
+                spawnPosZ
+            );
+        }
+        else if (enemyPrefab.CompareTag("Mini Boss"))
+        {
+            spawnPos = new Vector3(
+                Random.Range(-spawnRangeX, spawnRangeX),
+                0.0f,
+                spawnPosZ
+            );
+        }
+        else
+        {
+            // safety fallback
+            spawnPos = new Vector3(
+                Random.Range(-spawnRangeX, spawnRangeX),
+                0.718f,
+                spawnPosZ
+            );
+        }
+
+        Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
         enemyCount++;
     }
 }
