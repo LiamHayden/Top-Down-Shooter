@@ -24,7 +24,7 @@ public class ProjectileManager : MonoBehaviour
             Debug.Log("Space pressed");
 
             // Instaitate new projectile
-            Instantiate(projectilePrefab, player.transform.position, projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, new Vector3(player.transform.position.x, 1.0f, player.transform.position.z), projectilePrefab.transform.rotation);
         }
     }
 
