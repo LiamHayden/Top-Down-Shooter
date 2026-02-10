@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MiniBossController : MonoBehaviour
 {
+    public ParticleSystem largeExplosionParticle;
     public float lives = 3;
 
     // Destroy projectile and Enemy Mini Boss on collision after all lives are depleted.
@@ -17,6 +18,8 @@ public class MiniBossController : MonoBehaviour
         // Destroy Mini Boss if lives are 0 or less
         if (lives <= 0)
         {
+            Instantiate(largeExplosionParticle, transform.position, largeExplosionParticle.transform.rotation);
+
             Destroy(gameObject);
 
             // Update score
