@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public GameObject waveCompletedCanvas;
     public TextMeshProUGUI waveEndScoreText;
 
+    //public AudioClip explosionSound;
+
     // enums for game states
     public enum GameState
     {
