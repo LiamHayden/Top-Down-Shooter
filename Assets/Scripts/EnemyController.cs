@@ -3,7 +3,6 @@ using UnityEngine.Rendering;
 
 public class EnemyController : MonoBehaviour
 {
-    public static EnemyController Instance;
     public ParticleSystem explosionParticle;
     public AudioClip explosionSound;
     private AudioSource playerAudio;
@@ -15,18 +14,6 @@ public class EnemyController : MonoBehaviour
         explosionParticle.Stop();
 
         playerAudio = GetComponent<AudioSource>();
-    }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     void Update()
@@ -47,7 +34,11 @@ public class EnemyController : MonoBehaviour
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
 
             // Play explosion sound
-            playerAudio.PlayOneShot(explosionSound, 1.0f);
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+
+            //Destroy(gameObject);
         }
+
+        
     }
 }
