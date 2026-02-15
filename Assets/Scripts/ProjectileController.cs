@@ -12,7 +12,6 @@ public class ProjectileController : MonoBehaviour
     {
         if (ProjectileManager.isFired)
         {
-            Debug.Log("Projectile fired.");
             transform.Translate(Vector3.forward * Time.deltaTime * 15.0f); ;
         }
     }

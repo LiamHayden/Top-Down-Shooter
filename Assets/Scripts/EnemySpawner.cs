@@ -37,8 +37,6 @@ public class EnemySpawner : MonoBehaviour
     // Called when a wave starts
     public void StartSpawning()
     {
-
-        Debug.Log("StartSpawning CALLED", this);
         enemyCount = 0;
 
         if (spawnRoutine == null)

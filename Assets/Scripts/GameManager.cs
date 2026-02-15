@@ -95,11 +95,17 @@ public class GameManager : MonoBehaviour
         isStarted = false;
         menuCanvas.SetActive(true);
         scoreCanvas.SetActive(false);
-        waveEndScoreText.text = "Final Score: " + ScoreManager.score;
-        //waveCompletedCanvas.SetActive(true);
     }
 
-    // if the player gets >= -10 score end the game.
+    public void PauseGame()
+    {
+        menuCanvas.SetActive(true);
+        Time.timeScale = 0.0f;
+        scoreCanvas.SetActive(false);
+        waveCompletedCanvas.SetActive(false);
+    }
+
+    // if the player gets <= -10 score end the game.
     void Update()
     {
         if (ScoreManager.score <= -10)

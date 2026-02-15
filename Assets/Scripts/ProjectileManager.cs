@@ -21,7 +21,6 @@ public class ProjectileManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isFired = true;
-            Debug.Log("Space pressed");
 
             // Instaitate new projectile
             Instantiate(projectilePrefab, new Vector3(player.transform.position.x, 1.0f, player.transform.position.z), projectilePrefab.transform.rotation);
